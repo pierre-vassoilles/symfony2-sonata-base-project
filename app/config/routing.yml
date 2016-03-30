@@ -1,3 +1,14 @@
-app:
-    resource: "@AppBundle/Controller/"
+ice_common:
+    resource: "@IceCommonBundle/Controller/"
     type:     annotation
+    prefix:   /
+
+ice_admin:
+    resource: "@IceAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+ice_frontend:
+    resource: "@IceFrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
