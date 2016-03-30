@@ -1,0 +1,9 @@
+var/cache/*
+var/logs/*
+app/config/parameters.yml
+vendor
+web/bundles
+web/media
+
+change_rights
+clear_all
