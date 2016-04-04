@@ -1,24 +1,72 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        "FOS\UserBundle\Model\UserInterface": sha512
+    role_hierarchy:
+        ROLE_SONATA_ADMIN:
+          - ROLE_USER
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+        ROLE_ADMIN:
+
+
+        ROLE_ADMIN_ICE:
+
+          - ROLE_ADMIN
+
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_manager
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+        # -> custom firewall for the admin area of the URL
+        admin:
+            switch_user:        true
+            context:            user
+            pattern:            /(.*)
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /login
+                use_forward:    false
+                check_path:     /login_check
+                failure_path:   null
+                use_referer:    true
+            logout:
+                path:           /logout
+                target:         /login
 
+            anonymous:    true
+        # -> end custom configuration
+
+        # defaut login area for standard users
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            switch_user:        true
+            context:            user
+            pattern:            .*
+            form_login:
+                provider:         fos_userbundle
+                login_path:       /login
+                use_forward:      false
+                check_path:       /login_check
+                failure_path:     null
+            logout:
+                path:           fos_user_security_logout
+                target:         /login
+            anonymous:          true
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+    access_control:
+        # URL of FOSUserBundle which need to be available to anonymous users
+        - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+        # -> custom access control for the admin area of the URL
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # -> end
+
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        # Change these rules to adapt them to your needs
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -12,3 +12,9 @@ ice_frontend:
     resource: "@IceFrontendBundle/Controller/"
     type:     annotation
     prefix:   /
+
+
+#ROUTING SONATA
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /
