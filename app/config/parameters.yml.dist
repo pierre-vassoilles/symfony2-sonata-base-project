@@ -17,5 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-
-    site_name: 'Your site name'
+    site_url: 'http://your-site.url/app_dev.php'
+    basic_auth_username: null
+    basic_auth_password: null

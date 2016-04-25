@@ -1,41 +1,31 @@
 security:
     encoders:
-        "FOS\UserBundle\Model\UserInterface": sha512
+        FOS\UserBundle\Model\UserInterface: sha512
     role_hierarchy:
+
         ROLE_SONATA_ADMIN:
           - ROLE_USER
-
         ROLE_ADMIN:
+          - ROLE_SONATA_ADMIN
 
+          - ROLE_SONATA_ADMIN_USER_LIST
+          - ROLE_SONATA_ADMIN_USER_EDIT
+          - ROLE_SONATA_ADMIN_USER_CREATE
+          - ROLE_SONATA_ADMIN_USER_DELETE
+          - ROLE_SONATA_ADMIN_USER_VIEW
+          - ROLE_SONATA_ADMIN_USER_EXPORT
 
-        ROLE_ADMIN_ICE:
-
+        ROLE_ADMIN_REF:
+          - ROLE_SONATA_ADMIN
+        ROLE_ICE:
           - ROLE_ADMIN
+          - ROLE_ADMIN_REF
 
     providers:
         fos_userbundle:
             id: fos_user.user_manager
 
     firewalls:
-        # -> custom firewall for the admin area of the URL
-        admin:
-            switch_user:        true
-            context:            user
-            pattern:            /(.*)
-            form_login:
-                provider:       fos_userbundle
-                login_path:     /login
-                use_forward:    false
-                check_path:     /login_check
-                failure_path:   null
-                use_referer:    true
-            logout:
-                path:           /logout
-                target:         /login
-
-            anonymous:    true
-        # -> end custom configuration
-
         # defaut login area for standard users
         main:
             switch_user:        true
@@ -47,6 +37,7 @@ security:
                 use_forward:      false
                 check_path:       /login_check
                 failure_path:     null
+#                success_handler:  ice.user.after_login_redirector
             logout:
                 path:           fos_user_security_logout
                 target:         /login
@@ -58,15 +49,14 @@ security:
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        # -> custom access control for the admin area of the URL
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # -> end
-
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/mon-compte, role: ROLE_USER }
+        - { path: ^/mon-panier, role: ROLE_USER }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
+        - { path: ^/admin, role: [ROLE_SONATA_ADMIN] }
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

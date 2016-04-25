@@ -1,18 +1,27 @@
 imports:
     - { resource: parameters.yml }
+    - { resource: config_sonata.yml }
+    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml } #Config originale de KnpLabs
+    - { resource: ../../vendor/ice/knp-doctrine-behaviors/Ice/KnpDoctrineBehaviors/Resources/config/orm-services.yml } #Config spécifique
+    - { resource: ../../vendor/ice/sonata-admin-bundle/Ice/SonataAdminBundle/Resources/config/config_sonata.yml }
+    - { resource: ../../vendor/ice/file-upload-bundle/Ice/FileUploadBundle/Resources/config/config.yml }
     - { resource: security.yml }
     - { resource: services.yml }
-    - { resource: config_sonata.yml }
-    - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml }
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
+    site_name: 'Esthet''Ink'
+    mail_contact: 'contact@esthetink.com'
+    web_directory_name: webroot/web
+    path_to_upload_dir: ../data/uploads
+    liip_imagine.resolvers.default.web_path.cache_prefix: media/cache
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -27,13 +36,10 @@ framework:
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
-        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
-        handler_id:  session.handler.native_file
-        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
-        name: "Sf2SonataBaseProject"
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
     fragments:       ~
     http_method_override: true
-    assets: ~
 
 # Twig Configuration
 twig:
@@ -50,12 +56,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -69,3 +69,94 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Ice\EntityBundle\Entity\User
+    from_email:
+          address: %mail_contact%
+          sender_name : %site_name%
+#    registration:
+#            form:
+#                type: form_registration
+#    service:
+#        mailer: fos_user.mailer.twig_swift
+#    resetting:
+#         email:
+#             template:   IceCommonBundle:Mail:resetting.html.twig
+
+
+# APC Bundle
+ornicar_apc:
+    host: %site_url%
+    web_dir: %kernel.root_dir%/../web
+    basic_auth_username: %basic_auth_username%
+    basic_auth_password: %basic_auth_password%
+
+deploy:
+  prod:
+      dir: /data/www/path-to-production/webroot
+      host: 192.168.5.140
+      user: polom
+      port: 22
+      rsync_options: '-azCi --force --delete --progress --rsync-path="sudo -u www-data /usr/bin/rsync"'
+      post_deploy_operations:
+          - sudo -u www-data composer install -o --no-dev
+          - sudo -u www-data php app/conrsole cache:clear --env=prod --no-debug
+          - sudo -u www-data php app/console apc:clear
+          - sudo -u www-data php app/console assets:install
+
+  qualif:
+      dir: /data/www/qualif/path-to-qualif/webroot
+      host: 192.168.5.140
+      user: polom
+      port: 22
+      rsync_options: '-azCi --force --delete --progress --rsync-path="sudo -u www-data /usr/bin/rsync"'
+      post_deploy_operations:
+          - sudo -u www-data composer install -o --no-dev
+          - sudo -u www-data php app/console cache:clear --env=prod --no-debug
+          - sudo -u www-data php app/console apc:clear
+          - sudo -u www-data php app/console assets:install
+
+# CKEditor configuration
+ivory_ck_editor:
+    default_config: backend_config
+    configs:
+        backend_config:
+            allowedContent: true
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters:
+                instance: ckeditor
+            toolbar:
+                0 : [ "Source" ]
+                1 : [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]
+                2 : [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ]
+                3 : [ 'Bold', 'Italic', 'Subscript', 'Superscript', '-', 'RemoveFormat' ]
+                4 : [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ]
+                5 : [ 'Link', 'Unlink', 'Anchor' ]
+                6 : [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ]
+                7 : [ 'Format', 'FontSize']
+                8 : [ 'TextColor' ,  'BGColor' ]
+                9 : [ 'Maximize', 'ShowBlocks' ]
+                10 : [ 'About' ]
+
+#ELfinder bundle
+fm_elfinder:
+    instances:
+        ckeditor:
+            locale: %locale% # defaults to current request locale
+            editor: ckeditor # other options are tinymce, tinymce4, form, custom and simple
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            theme: smoothness # jquery theme
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads/ckeditor
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']
+                        upload_deny: ['all']
+                        upload_max_size: 2M

@@ -7,7 +7,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        $bundles = [
+        $bundles = array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
@@ -16,23 +16,44 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
-            // FOS
-            new FOS\UserBundle\FOSUserBundle(),
 
             // Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            // Deploy bundle
+            new Hpatoio\DeployBundle\DeployBundle(),
+            // APC Bundle
+            new Ornicar\ApcBundle\OrnicarApcBundle(),
+            //KNP
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            // CKEditor
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
+            // Friends Of Symfony
+            new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
 
+            // Liip Imagine
+            new Liip\ImagineBundle\LiipImagineBundle(),
+            // ICE Satis Bundle
+            new Ice\FileUploadBundle\IceFileUploadBundle(),
+            new Ice\SonataAdminBundle\IceSonataAdminBundle(),
+            new Ice\SonataDoctrineORMAdminBundle\IceSonataDoctrineORMAdminBundle(),
+
+            // Project Bundles
+            new Ice\UserBundle\IceUserBundle('FOSUserBundle'),
+            new Ice\EntityBundle\IceEntityBundle(),
             new Ice\FrontendBundle\IceFrontendBundle(),
             new Ice\AdminBundle\IceAdminBundle(),
-            new Ice\EntityBundle\IceEntityBundle(),
             new Ice\CommonBundle\IceCommonBundle(),
-        ];
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
+        );
+
+        if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
@@ -40,21 +61,6 @@ class AppKernel extends Kernel
         }
 
         return $bundles;
-    }
-
-    public function getRootDir()
-    {
-        return __DIR__;
-    }
-
-    public function getCacheDir()
-    {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
-    }
-
-    public function getLogDir()
-    {
-        return dirname(__DIR__).'/var/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
