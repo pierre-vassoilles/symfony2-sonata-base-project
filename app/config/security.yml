@@ -17,7 +17,8 @@ security:
 
         ROLE_ADMIN_REF:
           - ROLE_SONATA_ADMIN
-        ROLE_ICE:
+
+        ROLE_SUPER_ADMIN:
           - ROLE_ADMIN
           - ROLE_ADMIN_REF
 

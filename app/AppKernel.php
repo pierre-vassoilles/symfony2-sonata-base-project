@@ -15,7 +15,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
 
             // Sonata
             new Sonata\CoreBundle\SonataCoreBundle(),
@@ -39,10 +39,6 @@ class AppKernel extends Kernel
 
             // Liip Imagine
             new Liip\ImagineBundle\LiipImagineBundle(),
-            // ICE Satis Bundle
-            new Ice\FileUploadBundle\IceFileUploadBundle(),
-            new Ice\SonataAdminBundle\IceSonataAdminBundle(),
-            new Ice\SonataDoctrineORMAdminBundle\IceSonataDoctrineORMAdminBundle(),
 
             // Project Bundles
             new Ice\UserBundle\IceUserBundle('FOSUserBundle'),

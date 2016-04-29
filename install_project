@@ -79,12 +79,22 @@ php app/console doctrine:schema:validate
 php app/console doctrine:schema:update --dump-sql
 
 echo $separator
-read -r -p "Voulez-vous mettre à jour la base de données ? [y/n]  " response
+read -r -p "Would you like to update the database ? [y/n]  " response
 if [ "$response" = "y" ]; then
-    echo Mise à jour de la base
+    echo Updating database...
     php app/console doctrine:schema:update --force
 fi
 echo $separator
+
+echo $separator
+echo $BCyan Installing USER Fixtures $Color_Off
+echo $separator
+
+read -r -p "Would you like to load user fixtures ? [y/n]  " response
+if [ "$response" = "y" ]; then
+    echo Loading user datas...
+    php app/console doctrine:fixtures:load
+fi
 
 echo $separator
 echo $BCyan Clearing cache $Color_Off
@@ -98,29 +108,5 @@ echo $separator
 php app/console assets:install --symlink
 
 echo $separator
-read -r -p "Le projet utilise-il bower et node ? [y/n]  " response
-if [ "$response" = "y" ]; then
-    cd ./src/Ice/FrontendBundle/Resources
-
-    echo $separator
-    echo $BCyan NPM Install $Color_Off
-    echo $separator
-
-    npm install
-
-    echo $separator
-    echo $BCyan BOWER Install $Color_Off
-    echo $separator
-
-    bower install
-
-    echo $separator
-    echo $BCyan Grunt prod $Color_Off
-    echo $separator
-
-    grunt prod
-fi
-
-echo $separator
-echo $BGreen Installation terminée ! $Color_Off
+echo $BGreen Install finished ! $Color_Off
 echo $separator

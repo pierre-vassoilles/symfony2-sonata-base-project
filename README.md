@@ -1,68 +1,113 @@
-Symfony Standard Edition
-========================
+Symfony Standard Edition with SonataAdminBundle installed
+==============================================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+Welcome to the Symfony Sonata Distribution - a fully-functional Symfony2 Sonata application that you can use as the skeleton for your new application.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+This distribution exists to save you from repeating all the steps needed to create a basic Sonata app.
 
-What's inside?
---------------
+This document contains information on how to download, install, and start using Symfony with Sonata. For a more detailed explanation, see the Installation chapter of the Symfony Documentation.
 
-The Symfony Standard Edition is configured with the following defaults:
+NOTE: For older Symfony versions use the corresponding branch.
 
-  * An AppBundle you can use to start coding;
+1) Installing the Sonata Distribution
+-------------------------------------
 
-  * Twig as the only configured template engine;
+For now, you just have to clone this repository with a simple git command :
 
-  * Doctrine ORM/DBAL;
+    cd path/to/your/webroot
+    git clone https://github.com/pierre-vassoilles/symfony2-base-project.git ./
+    
+Next, you can use the "install_project" shell to initialize the project.
+Warning : You must have Composer globally installed to use it.
+The installer will do :
 
-  * Swiftmailer;
+- Create mandatory directories like app/cache, app/logs, data/uploads, web/media (for LiipImagineBundle)
+- Composer install --verbose -o
+- Set ACLs on some directories if you want to develop with an other user than www-data
+- Validate and Update the database
+- Load some user fixtures
+- Clear all caches
+- Install assets with symlinks
 
-  * Annotations enabled for everything.
 
-It comes pre-configured with the following bundles:
+2) Checking your System Configuration
+-------------------------------------
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+Before starting coding, make sure that your local system is properly
+configured for Symfony.
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
+Execute the `check.php` script from the command line:
 
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
+    php app/check.php
 
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
+Access the `config.php` script from a browser:
 
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
+    http://localhost/path/to/symfony/app/web/config.php
 
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
+If you get any warnings or recommendations, fix them before moving on.
 
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
+3) Set up, initialize and browse the app manually
+-------------------------------------------------
 
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
+### Installing dependencies
 
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
+If you have Composer installed globally on your server, juste do :
 
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
+    composer install -vvv -o
+    
+If you don't have Composer yet, download it following the instructions on
+http://getcomposer.org/ or just run the following command:
 
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
+    curl -s http://getcomposer.org/installer | php
+    
+Then, run :
+    
+    php composer.phar install -vvv -o
 
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
+### Initializing the DB
 
-Enjoy!
+Before you can run the server and log in to Sonata you need to create the
+tables first.
 
-[1]:  https://symfony.com/doc/2.8/book/installation.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/2.8/book/doctrine.html
-[8]:  https://symfony.com/doc/2.8/book/templating.html
-[9]:  https://symfony.com/doc/2.8/book/security.html
-[10]: https://symfony.com/doc/2.8/cookbook/email.html
-[11]: https://symfony.com/doc/2.8/cookbook/logging/monolog.html
-[13]: https://symfony.com/doc/2.8/bundles/SensioGeneratorBundle/index.html
+    ./app/console doctrine:schema:create
+
+### Create the users
+
+You can either create a handful of users like this (one of the usernames is 
+'superadmin' with password 'test')
+
+    ./app/console doctrine:fixtures:load
+
+Or you can manually create a user yourself
+
+    ./app/console fos:user:create username emai@example.com password
+    ./app/console fos:user:promote username ROLE_SONATA_ADMIN
+
+### Install assets:
+
+    ./app/console assets:install --symlink --relative web
+
+
+4) Available Bundles
+-------------------------------------------------
+
+- **Symfony Standard Edition 2.8**
+- **Doctrine 2**
+- **FOSUserBundle** : friendsofsymfony/user-bundle
+- **FOS JsRoutingBundle** : friendsofsymfony/jsrouting-bundle
+- **sonata-project/admin-bundle**  : For admin section
+- **sonata-project/doctrine-orm-admin-bundle**
+- **liip/imagine-bundle** : Very usefull for image display
+- **knplabs/doctrine-behaviors** : Implementing some Traits like Timestampable, Sluggable, SoftDeletable, etc.
+- **egeloen/ckeditor-bundle** : Adds the famous ckEditor to your forms (available for admin section too)
+- **hpatoio/deploy-bundle** : Deployment bundle using rsync command
+- **icedevelopment/mysql-workbench-schema-exporter** : A very userful bundle if you use MySQL Workbench to create your database. It automatically creates your entities from a MySQL Workbench model
+- **icedevelopment/apc-bundle** : Command line tool to clear APC cache and OPCode cache
+
+Skeleton Bundles :
+
+- **Ice/EntityBundle** : A Bundle where you can put all your entities
+- **Ice/FrontendBundle** : Contains a basic layout, website assets and basic controllers like content pages
+- **Ice/CommonBundle** : Contains common features of the projets like Menu and emails
+- **Ice/AdminBundle** : The admin section. Contains the admin classes and the Sonata overrides
+- **Ice/UserBundle** : Override of the FOSUserBundle

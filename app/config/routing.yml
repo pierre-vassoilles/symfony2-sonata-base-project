@@ -48,10 +48,6 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
-ice_fileupload:
-    resource: "@IceFileUploadBundle/Controller/"
-    type:     annotation
-
 #ElfinderBundle
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"

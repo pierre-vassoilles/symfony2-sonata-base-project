@@ -29,6 +29,18 @@ class User extends \FOS\UserBundle\Entity\User
      */
     protected $id;
 
+    /**
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
+     */
+    protected $firstname;
+
+    /**
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
+     */
+    protected $lastname;
+
+
+
     public function __construct()
     {
         parent::__construct();
@@ -49,6 +61,40 @@ class User extends \FOS\UserBundle\Entity\User
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param mixed $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param mixed $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
         return $this;
     }
 

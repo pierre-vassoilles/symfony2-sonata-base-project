@@ -1,5 +1,5 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "pierre-vassoilles/symfony2-base-project",
     "license": "MIT",
     "type": "project",
     "description": "The \"Symfony Standard Edition\" distribution",
@@ -31,12 +31,10 @@
         "hpatoio/deploy-bundle": "1.5.*",
 
         "icedevelopment/mysql-workbench-schema-exporter": "1.0.*",
-        "ice/file-upload-bundle": "1.1.*",
         "helios-ag/fm-elfinder-bundle": "5.3.*",
-        "ice/sonata-admin-bundle": "2.0.*",
-        "ice/sonata-doctrine-orm-admin-bundle": "1.0.*",
-        "ice/knp-doctrine-behaviors": "^1.0",
-        "icedevelopment/apc-bundle": "1.0.*"
+        "icedevelopment/apc-bundle": "1.0.*",
+        "doctrine/data-fixtures": "^1.1",
+        "doctrine/doctrine-fixtures-bundle": "^2.3"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"
@@ -63,12 +61,6 @@
         "bin-dir": "bin",
         "component-dir": "web/assets"
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.ice-dev.com:446/"
-        }
-    ],
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",

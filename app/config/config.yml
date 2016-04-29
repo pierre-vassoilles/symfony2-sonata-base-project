@@ -2,9 +2,6 @@ imports:
     - { resource: parameters.yml }
     - { resource: config_sonata.yml }
     - { resource: ../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml } #Config originale de KnpLabs
-    - { resource: ../../vendor/ice/knp-doctrine-behaviors/Ice/KnpDoctrineBehaviors/Resources/config/orm-services.yml } #Config spécifique
-    - { resource: ../../vendor/ice/sonata-admin-bundle/Ice/SonataAdminBundle/Resources/config/config_sonata.yml }
-    - { resource: ../../vendor/ice/file-upload-bundle/Ice/FileUploadBundle/Resources/config/config.yml }
     - { resource: security.yml }
     - { resource: services.yml }
 
@@ -13,8 +10,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    site_name: 'Esthet''Ink'
-    mail_contact: 'contact@esthetink.com'
+    site_name: 'Your site name'
+    mail_contact: 'your-contact-mail@example.com'
     web_directory_name: webroot/web
     path_to_upload_dir: ../data/uploads
     liip_imagine.resolvers.default.web_path.cache_prefix: media/cache
