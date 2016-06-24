@@ -1,0 +1,46 @@
+monolog:
+    handlers:
+        main:
+            type:           rotating_file
+            max_files:      3
+            path:           %kernel.logs_dir%/%kernel.environment%.all.log
+            level:          info
+
+        login:
+            type:           rotating_file
+            max_files:      10
+            path:           %kernel.logs_dir%/%kernel.environment%.auth.log
+            level:          info
+            channels:       security
+
+        main_error:
+            type:           fingers_crossed
+            action_level:   error
+            handler:        streamed_error
+        streamed_error:
+            type:           rotating_file
+            max_files:      15
+            path:           %kernel.logs_dir%/%kernel.environment%.error.log
+            level:          info
+
+        main_critical:
+            type:           fingers_crossed
+            action_level:   critical
+            handler:        grouped_critical
+        grouped_critical:
+            type:           group
+            members:        [streamed_critical, buffered_critical]
+        streamed_critical:
+            type:           rotating_file
+            max_files:      15
+            path:           %kernel.logs_dir%/%kernel.environment%.critical.log
+            level:          info
+        buffered_critical:
+            type:           buffer
+            handler:        swift_critical
+        swift_critical:
+            type:           swift_mailer
+            from_email:     %mail_no_reply%
+            to_email:       %mail_admin%
+            subject:        '[%monolog_sitename% - %kernel.environment%] %monolog_subject%'
+            level:          info

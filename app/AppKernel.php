@@ -36,6 +36,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
+            // KnpLabs
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
 
             // Liip Imagine
             new Liip\ImagineBundle\LiipImagineBundle(),

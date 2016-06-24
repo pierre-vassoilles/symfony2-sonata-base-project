@@ -20,3 +20,8 @@ parameters:
     site_url: 'http://your-site.url/app_dev.php'
     basic_auth_username: null
     basic_auth_password: null
+
+    mail_no_reply: 'contact@your-site.com'
+    mail_admin: 'admin@your-site.com'
+    monolog_subject: 'A critical error occurred !'
+    monolog_sitename: 'Your site name'
