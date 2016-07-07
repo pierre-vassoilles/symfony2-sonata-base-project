@@ -18,10 +18,10 @@ class UserAdmin extends Admin
     {
         $query = parent::createQuery($context);
 
-        if (!$this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_ICE')) {
+        if (!$this->getConfigurationPool()->getContainer()->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN')) {
             $query
                 ->andWhere($query->getRootAliases()[0] . '.roles NOT LIKE :role')
-                ->setParameter('role', '%ROLE_ICE%')
+                ->setParameter('role', '%ROLE_SUPER_ADMIN%')
             ;
         }
         return $query;

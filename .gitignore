@@ -1,10 +1,19 @@
+# APP
 app/cache/*
 app/logs/*
 app/config/parameters.yml
+app/bootstrap.php.cache
 vendor
+
+# Logs
+app/logs
+
+# WEB
 web/bundles
 web/media
 web/assets
 
+
+# Scripts
 change_rights
 clear_all
