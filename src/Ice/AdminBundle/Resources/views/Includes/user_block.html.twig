@@ -1,0 +1,27 @@
+{% extends 'SonataAdminBundle:Core:user_block.html.twig' %}
+
+{% block user_block %}
+
+    {% if app.user %}
+        {% set _bg_class          = "bg-light-blue" %}
+        {% set _logout_uri        = url('fos_user_security_logout') %}
+        {% set _logout_text       = 'Déconnexion' %}
+
+        <li class="user-header {{ _bg_class }}">
+            <p>{{ app.user }}</p>
+        </li>
+
+        {#
+            Uncomment to add some information
+                <li class="user-body">
+                </li>
+        #}
+
+        <li class="user-footer">
+            <div class="pull-right">
+                <a href="{{ _logout_uri }}" class="btn btn-default btn-flat"><i class="fa fa-sign-out fa-fw"></i> {{ _logout_text }}</a>
+            </div>
+        </li>
+    {% endif %}
+
+{% endblock %}
