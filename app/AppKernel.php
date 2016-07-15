@@ -22,6 +22,15 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\ClassificationBundle\SonataClassificationBundle(),
+            new Sonata\PageBundle\SonataPageBundle(),
+            new Sonata\SeoBundle\SonataSeoBundle(),
+            new Sonata\CacheBundle\SonataCacheBundle(),
+            new Sonata\NotificationBundle\SonataNotificationBundle(),
+            new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Sonata\MediaBundle\SonataMediaBundle(),
+
+
             // Deploy bundle
             new Hpatoio\DeployBundle\DeployBundle(),
             // APC Bundle
@@ -43,12 +52,10 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
 
             // Project Bundles
-            new Ice\UserBundle\IceUserBundle('FOSUserBundle'),
-            new Ice\EntityBundle\IceEntityBundle(),
-            new Ice\FrontendBundle\IceFrontendBundle(),
-            new Ice\AdminBundle\IceAdminBundle(),
-            new Ice\CommonBundle\IceCommonBundle(),
-
+            new AdminBundle\AdminBundle(),
+            new EntityBundle\EntityBundle(),
+            new FrontendBundle\FrontendBundle(),
+            new UserBundle\UserBundle('FOSUserBundle'),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

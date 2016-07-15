@@ -1,5 +1,6 @@
 # Sonata
 sonata_block:
+    context_manager: sonata.page.block.context_manager
     default_contexts: [cms]
     blocks:
         # Enable the SonataAdminBundle block
@@ -41,3 +42,99 @@ sonata_core:
         success:
             types:
                 - { type: new_document_message }
+
+
+sonata_classification:
+
+
+sonata_page:
+    slugify_service:   sonata.core.slugify.cocur # old BC value is sonata.core.slugify.native
+    multisite:        host
+    default_template: default # template key from templates section, used as default for new pages
+    templates:
+        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
+        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+
+    # Generates a snapshot when a page is saved (from the admin)
+    direct_publication: false # or %kernel.debug% if you want to publish in dev mode (but not in prod)
+
+    use_streamed_response: true # set the value to false in debug mode or if the reverse proxy does not handle streamed response
+    ignore_route_patterns:
+        - ^(.*)admin(.*)   # ignore admin route, ie route containing 'admin'
+        - ^_(.*)          # ignore symfony routes
+
+    ignore_routes:
+        - sonata_page_cache_esi
+        - sonata_page_cache_ssi
+        - sonata_page_js_sync_cache
+        - sonata_page_js_async_cache
+        - sonata_cache_esi
+        - sonata_cache_ssi
+        - sonata_cache_js_async
+        - sonata_cache_js_sync
+        - sonata_cache_apc
+
+    ignore_uri_patterns:
+        - ^/admin\/   # ignore admin route, ie route containing 'admin'
+
+    page_defaults:
+        homepage: {decorate: false} # disable decoration for homepage, key - is a page route
+
+    default_template: default # template key from templates section, used as default for pages
+    templates:
+        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
+        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+
+    # manage the http errors
+    catch_exceptions:
+        not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})
+        fatal:     [500]    # so you can use the same page for different http errors or specify specific page for each error
+
+    class:
+        page:                 EntityBundle\Entity\Page
+        snapshot:             EntityBundle\Entity\Snapshot
+        block:                EntityBundle\Entity\Block
+        site:                 EntityBundle\Entity\Site
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            # enable the DynamicRouter with high priority to allow overwriting configured routes with content
+            #cmf_routing.dynamic_router: 200
+            # enable the symfony default router with a lower priority
+            sonata.page.router: 150
+            router.default: 100
+
+
+sonata_media:
+    # if you don't use default namespace configuration
+    #class:
+    #    media: MyVendor\MediaBundle\Entity\Media
+    #    gallery: MyVendor\MediaBundle\Entity\Gallery
+    #    gallery_has_media: MyVendor\MediaBundle\Entity\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_orm # or doctrine_mongodb, doctrine_phpcr
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+
+    cdn:
+        server:
+            path: /uploads/media # http://media.sonata-project.org/
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+#
+#    providers:
+#        image:
+#            resizer: sonata.media.resizer.square

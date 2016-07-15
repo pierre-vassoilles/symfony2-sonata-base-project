@@ -54,11 +54,30 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            json:     Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        entity_managers:
+            default:
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                auto_mapping: true
+                #metadata_cache_driver: apc
+                #query_cache_driver: apc
+                #result_cache_driver: apc
+                mappings:
+                    #ApplicationSonataClassificationBundle: ~
+                    SonataClassificationBundle: ~
+                    SonataPageBundle: ~
+                    SonataMediaBundle: ~
+
+#doctrine_phpcr:
+#    odm:
+#        auto_mapping: true
+#        mappings:
+#            SonataMediaBundle:
+#                prefix: Sonata\MediaBundle\PHPCR
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -72,7 +91,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Ice\EntityBundle\Entity\User
+    user_class: EntityBundle\Entity\User
     from_email:
           address: %mail_contact%
           sender_name : %site_name%
