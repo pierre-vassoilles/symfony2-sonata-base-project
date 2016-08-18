@@ -10,6 +10,7 @@ namespace EntityBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * Class User
@@ -19,7 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="EntityBundle\Entity\Repository\UserRepository")
  * @ORM\Table(name="user")
  */
-class User extends \FOS\UserBundle\Entity\User
+class User extends BaseUser
 {
 
     /**
@@ -28,17 +29,6 @@ class User extends \FOS\UserBundle\Entity\User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    /**
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
-     */
-    protected $firstname;
-
-    /**
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
-     */
-    protected $lastname;
-
 
 
     public function __construct()
@@ -61,40 +51,6 @@ class User extends \FOS\UserBundle\Entity\User
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * @param mixed $firstname
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * @param mixed $lastname
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
         return $this;
     }
 

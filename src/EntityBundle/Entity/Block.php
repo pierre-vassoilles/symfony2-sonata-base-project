@@ -32,10 +32,23 @@ class Block extends BaseBlock
      */
     protected $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="EntityBundle\Entity\Page", inversedBy="blocks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $page;
 
 
-    
+    /**
+     * @ORM\ManyToOne(targetEntity="EntityBundle\Entity\Block", inversedBy="children")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $parent;
 
+    /**
+     * @ORM\OneToMany(targetEntity="EntityBundle\Entity\Block", mappedBy="parent")
+     */
+    protected $children;
 
     /**
      * @return mixed

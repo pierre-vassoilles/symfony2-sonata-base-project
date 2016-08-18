@@ -16,11 +16,14 @@ sonata_block:
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
 
 sonata_admin:
     title: %site_name%
     templates:
-      user_block: 'IceAdminBundle:Includes:user_block.html.twig'
+      user_block: 'AdminBundle:Includes:user_block.html.twig'
     security:
         handler: sonata.admin.security.handler.role
         information:
@@ -82,9 +85,74 @@ sonata_page:
 
     default_template: default # template key from templates section, used as default for pages
     templates:
-        default:  { path: 'SonataPageBundle::layout.html.twig',          name: 'default' }
-        2columns: { path: 'SonataPageBundle::2columns_layout.html.twig', name: '2 columns layout' }
+        default:
+          path: 'FrontendBundle:Layout:layout.html.twig'
+          name: 'default'
+          containers:
+              header:
+                  name: Header
+              content_top:
+                  name: Top content
+              content:
+                  name: Main content
+              content_bottom:
+                  name: Bottom content
+              footer:
+                  name: Footer
+          matrix:
+              layout: |
+                  HHHHHHHH
+                  TTTTBBBB
+                  TTTTBBBB
+                  TTTTBBBB
+                  TTTTBBBB
+                  CCCCCCCC
+                  CCCCCCCC
+                  FFFFFFFF
 
+              mapping:
+                  H: header
+                  T: content_top
+                  C: content
+                  B: content_bottom
+                  F: footer
+        2columns:
+            path: 'SonataPageBundle::2columns_layout.html.twig'
+            name: '2 columns layout'
+            inherits_containers: default
+            containers:
+                left_col:
+                    name: Left column
+                    blocks:
+                        - sonata.media.block.media
+                        - sonata.media.block.gallery
+                        - sonata.media.block.feature_media
+                right_col:
+                    name: Right column
+                    blocks:
+                        - sonata.news.block.recent_posts
+                        - sonata.order.block.recent_orders
+                        - sonata.product.block.recent_products
+            matrix:
+                layout: |
+
+                    HHHHHHHHHH
+                    TTTTTTTTTT
+                    TTTTTTTTTT
+                    LLLCCCCRRR
+                    LLLCCCCRRR
+                    BBBBBBBBBB
+                    BBBBBBBBBB
+                    FFFFFFFFFF
+
+                mapping:
+                   H: header
+                   T: content_top
+                   L: left_col
+                   R: right_col
+                   C: content
+                   B: content_bottom
+                   F: footer
     # manage the http errors
     catch_exceptions:
         not_found: [404]    # render 404 page with "not_found" key (name generated: _page_internal_error_{key})
@@ -138,3 +206,60 @@ sonata_media:
 #    providers:
 #        image:
 #            resizer: sonata.media.resizer.square
+
+sonata_news:
+    title:        Sonata Project
+    link:         https://sonata-project.org
+    description:  Cool bundles on top of Symfony2
+    salt:         'secureToken'
+    permalink_generator: sonata.news.permalink.date # sonata.news.permalink.collection
+
+    comment:
+        notification:
+            emails:   [email@example.org, email2@example.org]
+            from:     no-reply@sonata-project.org
+            template: 'SonataNewsBundle:Mail:comment_notification.txt.twig'
+
+#news:
+#    providers:
+#        - sonata.media.provider.dailymotion
+#        - sonata.media.provider.youtube
+#        - sonata.media.provider.image
+#
+#    formats:
+#        small: { width: 150 , quality: 95}
+#        big:   { width: 500 , quality: 90}
+
+sonata_formatter:
+    formatters:
+        markdown:
+            service: sonata.formatter.text.markdown
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+                - sonata.media.formatter.twig
+
+        text:
+            service: sonata.formatter.text.text
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+                - sonata.media.formatter.twig
+
+        rawhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+                - sonata.media.formatter.twig
+
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
+                - sonata.media.formatter.twig
+
+sonata_user:
+    security_acl: true
+    manager_type: orm # can be orm or mongodb

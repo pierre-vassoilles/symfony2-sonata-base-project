@@ -32,7 +32,23 @@ class Snapshot extends BaseSnapshot
      */
     protected $id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="EntityBundle\Entity\Page", inversedBy="snapshots")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $page;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EntityBundle\Entity\Snapshot", inversedBy="children")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EntityBundle\Entity\Snapshot", mappedBy="parent")
+     */
+    protected $children;
 
     
 

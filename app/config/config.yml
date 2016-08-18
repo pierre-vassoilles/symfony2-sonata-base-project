@@ -43,6 +43,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+      resources:
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -71,6 +74,9 @@ doctrine:
                     SonataClassificationBundle: ~
                     SonataPageBundle: ~
                     SonataMediaBundle: ~
+                    SonataNewsBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~
 
 #doctrine_phpcr:
 #    odm:
@@ -95,6 +101,13 @@ fos_user:
     from_email:
           address: %mail_contact%
           sender_name : %site_name%
+
+    group:
+        group_class:   Sonata\UserBundle\Entity\BaseGroup
+        group_manager: sonata.user.orm.group_manager                    # If you're using doctrine orm (use sonata.user.mongodb.group_manager for mongodb)
+
+    service:
+        user_manager: sonata.user.orm.user_manager
 #    registration:
 #            form:
 #                type: form_registration

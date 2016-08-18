@@ -29,7 +29,10 @@ class AppKernel extends Kernel
             new Sonata\NotificationBundle\SonataNotificationBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new Sonata\MediaBundle\SonataMediaBundle(),
-
+            new Sonata\NewsBundle\SonataNewsBundle(),
+//            new Sonata\UserBundle\SonataUserBundle(),
+            new Sonata\FormatterBundle\SonataFormatterBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
 
             // Deploy bundle
             new Hpatoio\DeployBundle\DeployBundle(),
@@ -47,6 +50,7 @@ class AppKernel extends Kernel
 
             // KnpLabs
             new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new Knp\Bundle\MarkdownBundle\KnpMarkdownBundle(),
 
             // Liip Imagine
             new Liip\ImagineBundle\LiipImagineBundle(),

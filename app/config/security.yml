@@ -1,6 +1,8 @@
 security:
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
+    acl:
+        connection: default
     role_hierarchy:
 
         ROLE_SONATA_ADMIN:
@@ -30,6 +32,20 @@ security:
             id: fos_user.user_manager
 
     firewalls:
+        admin:
+            pattern:            /admin(.*)
+            context:            user
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                failure_path:   null
+            logout:
+                path:           /admin/logout
+                target:         /admin/login
+            anonymous:          true
+
         # defaut login area for standard users
         main:
             switch_user:        true
@@ -53,12 +69,10 @@ security:
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        - { path: ^/mon-compte, role: ROLE_USER }
-        - { path: ^/mon-panier, role: ROLE_USER }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
