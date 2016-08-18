@@ -18,7 +18,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
 
-        "sonata-project/admin-bundle": "3.3.*",
+        "sonata-project/admin-bundle": "3.4.*",
         "sonata-project/doctrine-orm-admin-bundle": "3.0.*",
         "sensio/generator-bundle": "~2.5",
 
