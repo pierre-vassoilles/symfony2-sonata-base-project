@@ -14,3 +14,12 @@ web/assets
 # Scripts
 change_rights
 clear_all
+
+# NPM
+/src/CoreBundle/Resources/node_modules
+/src/CoreBundle/Resources/public/css/app.min.css
+/src/CoreBundle/Resources/public/css/app.min.css.map
+
+/src/CoreBundle/Resources/public/js/app.min.js
+/src/CoreBundle/Resources/public/js/app.min.js.map
+

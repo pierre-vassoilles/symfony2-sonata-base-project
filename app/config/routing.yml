@@ -1,23 +1,17 @@
-ice_user:
-    resource: "@IceUserBundle/Controller/"
+core_bundle:
+    resource: "@CoreBundle/Controller/"
     type:     annotation
     prefix:   /
 
-ice_common:
-    resource: "@IceCommonBundle/Controller/"
+admin_bundle:
+    resource: "@AdminBundle/Controller/"
     type:     annotation
     prefix:   /
 
-ice_admin:
-    resource: "@IceAdminBundle/Controller/"
+user_bundle:
+    resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
-
-ice_frontend:
-    resource: "@IceFrontendBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'

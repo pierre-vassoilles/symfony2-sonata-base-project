@@ -43,12 +43,9 @@ class AppKernel extends Kernel
             new Liip\ImagineBundle\LiipImagineBundle(),
 
             // Project Bundles
-            new Ice\UserBundle\IceUserBundle('FOSUserBundle'),
-            new Ice\EntityBundle\IceEntityBundle(),
-            new Ice\FrontendBundle\IceFrontendBundle(),
-            new Ice\AdminBundle\IceAdminBundle(),
-            new Ice\CommonBundle\IceCommonBundle(),
-
+            new UserBundle\UserBundle('FOSUserBundle'),
+            new AdminBundle\AdminBundle(),
+            new CoreBundle\CoreBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

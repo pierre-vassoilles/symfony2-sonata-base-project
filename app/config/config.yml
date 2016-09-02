@@ -72,7 +72,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Ice\EntityBundle\Entity\User
+    user_class: CoreBundle\Entity\User
     from_email:
           address: %mail_contact%
           sender_name : %site_name%

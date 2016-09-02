@@ -19,7 +19,7 @@ sonata_block:
 sonata_admin:
     title: %site_name%
     templates:
-      user_block: 'IceAdminBundle:Includes:user_block.html.twig'
+      user_block: 'AdminBundle:Includes:user_block.html.twig'
     security:
         handler: sonata.admin.security.handler.role
         information:
