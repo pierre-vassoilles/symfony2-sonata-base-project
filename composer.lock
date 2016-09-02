@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3919cc79fa9275534f08bc6bfdb533f5",
-    "content-hash": "6a762e9897ae5064b9c6244bfb422ebe",
+    "hash": "ae626860763e9e5da3e71815a0df2e0e",
+    "content-hash": "a4260cb5c4cbe9a3dda9794c8f09dcf3",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3057,6 +3057,55 @@
                 "sonata"
             ],
             "time": "2016-06-17 12:05:02"
+        },
+        {
+            "name": "sonata-project/doctrine-extensions",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sonata-project/sonata-doctrine-extensions.git",
+                "reference": "4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sonata-project/sonata-doctrine-extensions/zipball/4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f",
+                "reference": "4c6e9bd3ac9ef4c2f19e552a63d4926db5a9400f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.2",
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sonata\\Doctrine\\": "src/",
+                    "Sonata\\Doctrine\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Rabaix",
+                    "email": "thomas.rabaix@sonata-project.org",
+                    "homepage": "http://sonata-project.org"
+                },
+                {
+                    "name": "Sonata Community",
+                    "homepage": "https://github.com/sonata-project/sonata-doctrine-extensions/contributors"
+                }
+            ],
+            "description": "Doctrine2 behavioral extensions",
+            "homepage": "https://github.com/sonata-project/sonata-doctrine-extensions",
+            "keywords": [
+                "doctrine",
+                "doctrine2",
+                "json"
+            ],
+            "time": "2014-02-14 12:45:49"
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",

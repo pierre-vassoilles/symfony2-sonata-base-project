@@ -1,0 +1,21 @@
+{
+  "export": "doctrine2-annotation",
+  "zip": false,
+  "dir": "src/CoreBundle/Entity/EntityExport",
+  "params": {
+    "backupExistingFile": true,
+    "skipPluralNameChecking": false,
+    "enhanceManyToManyDetection": true,
+    "bundleNamespace": "CoreBundle",
+    "entityNamespace": "Entity",
+    "repositoryNamespace": "CoreBundle\\Entity\\Repository",
+    "useAnnotationPrefix": "ORM\\",
+    "useAutomaticRepository": false,
+    "indentation": 4,
+    "filename": "%entity%.%extension%",
+    "quoteIdentifier": false,
+    "propertyNameCodingStyle": "lowercamelcase",
+    "tableNameCodingStyle": "underscore",
+    "columnNameCodingStyle": "underscore"
+  }
+}
