@@ -43,7 +43,12 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-
+    form_themes:
+        - 'AdminBundle:Form:elfinderTheme.html.twig'
+        - 'AdminBundle:Form:plainFieldsTheme.html.twig'
+        - 'AdminBundle:Form:jsonEditorTheme.html.twig'
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
+    globals:
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -54,6 +59,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+          json: Sonata\Doctrine\Types\JsonType
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -84,39 +91,6 @@ fos_user:
 #    resetting:
 #         email:
 #             template:   IceCommonBundle:Mail:resetting.html.twig
-
-
-# APC Bundle
-ornicar_apc:
-    host: %site_url%
-    web_dir: %kernel.root_dir%/../web
-    basic_auth_username: %basic_auth_username%
-    basic_auth_password: %basic_auth_password%
-
-deploy:
-  prod:
-      dir: /data/www/path-to-production/webroot
-      host: 192.168.5.140
-      user: polom
-      port: 22
-      rsync_options: '-azCi --force --delete --progress --rsync-path="sudo -u www-data /usr/bin/rsync"'
-      post_deploy_operations:
-          - sudo -u www-data composer install -o --no-dev
-          - sudo -u www-data php app/conrsole cache:clear --env=prod --no-debug
-          - sudo -u www-data php app/console apc:clear
-          - sudo -u www-data php app/console assets:install
-
-  qualif:
-      dir: /data/www/qualif/path-to-qualif/webroot
-      host: 192.168.5.140
-      user: polom
-      port: 22
-      rsync_options: '-azCi --force --delete --progress --rsync-path="sudo -u www-data /usr/bin/rsync"'
-      post_deploy_operations:
-          - sudo -u www-data composer install -o --no-dev
-          - sudo -u www-data php app/console cache:clear --env=prod --no-debug
-          - sudo -u www-data php app/console apc:clear
-          - sudo -u www-data php app/console assets:install
 
 # CKEditor configuration
 ivory_ck_editor:

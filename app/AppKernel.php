@@ -22,10 +22,7 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
-            // Deploy bundle
-            new Hpatoio\DeployBundle\DeployBundle(),
-            // APC Bundle
-            new Ornicar\ApcBundle\OrnicarApcBundle(),
+
             //KNP
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),

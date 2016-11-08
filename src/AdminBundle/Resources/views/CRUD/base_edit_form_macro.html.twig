@@ -1,0 +1,44 @@
+{% macro render_groups(admin, form, groups, has_tab) %}
+    {% if has_tab %}<div class="row">{% endif %}
+
+    {% set col_nb = 0 %}
+
+    {% for code in groups %}
+        {% set form_group = admin.formgroups[code] %}
+        <div class="{{ form_group.class }}"> {# default class 'col-md-12' removed because it do not work with tabs#}
+            <div class="box box-success">
+                <div class="box-header">
+                    <h4 class="box-title">
+                        {{ admin.trans(form_group.name, {}, form_group.translation_domain) }}
+                    </h4>
+                </div>
+                {#<div class="box{% if loop.first %} in{% endif %}" id="{{ admin.uniqid }}_{{ loop.index }}">#}
+                <div class="box-body">
+                    <div class="sonata-ba-collapsed-fields">
+                        {% if form_group.description != false %}
+                            <p>{{ form_group.description|raw }}</p>
+                        {% endif %}
+
+                        {% for field_name in form_group.fields %}
+                            {% if admin.formfielddescriptions[field_name] is defined %}
+                                {{ form_row(form[field_name])}}
+                            {% endif %}
+                        {% else %}
+                            <em>{{ 'message_form_group_empty'|trans({}, 'SonataAdminBundle') }}</em>
+                        {% endfor %}
+                    </div>
+                </div>
+                {#</div>#}
+            </div>
+        </div>
+
+        {% set col_nb = col_nb + form_group.class|extract('/col\-md\-([0-9]{1,2})/') %}
+        {% if col_nb is divisible by(12) %}
+            {#<h1>{{ col_nb }}</h1>#}
+            </div><div class="row equalize">
+            {% set col_nb = 0 %}
+        {% endif %}
+
+    {% endfor %}
+    {% if has_tab %}</div>{% endif %}
+{% endmacro %}

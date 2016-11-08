@@ -1,19 +1,15 @@
 # APP
-app/cache/*
-app/logs/*
-app/config/parameters.yml
-app/bootstrap.php.cache
-vendor
+/app/cache/*
+/app/logs/*
+/app/config/parameters.yml
+/app/bootstrap.php.cache
+/vendor
 
 # WEB
-web/bundles
-web/media
-web/assets
+/web/bundles
+/web/media
+/web/assets
 
-
-# Scripts
-change_rights
-clear_all
 
 # NPM
 /src/CoreBundle/Resources/node_modules
@@ -23,3 +19,16 @@ clear_all
 /src/CoreBundle/Resources/public/js/app.min.js
 /src/CoreBundle/Resources/public/js/app.min.js.map
 
+#PHPStorm
+/.idea
+.idea
+
+/data
+!/data/.gitkeep
+
+#Sitemaps
+/web/sitemap.*
+
+# Entity Export
+/src/CoreBundle/EntityExport
+/src/*/Entity/*.php~

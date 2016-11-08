@@ -15,11 +15,18 @@ sonata_block:
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
+        sonata.admin.block.stats:
 
 sonata_admin:
     title: %site_name%
+    #title_logo: #path to your logo here
     templates:
-      user_block: 'AdminBundle:Includes:user_block.html.twig'
+      layout :                'AdminBundle::standard_layout.html.twig'
+      user_block:             'AdminBundle:Includes:user_block.html.twig'
+      add_block:              'AdminBundle:Includes:add_block.html.twig'
+      search:                 'AdminBundle:Includes:search.html.twig'
+      knp_menu_template:      'AdminBundle:Includes:sonata_menu.html.twig'
+      edit:                   'AdminBundle:CRUD:edit.html.twig'
     security:
         handler: sonata.admin.security.handler.role
         information:
@@ -36,6 +43,38 @@ sonata_admin:
         blocks:
             # display a dashboard block
             - { position: left, type: sonata.admin.block.admin_list }
+
+            #Block Stats definition
+#            -
+#                class:    'col-lg-3 col-xs-6'          # twitter bootstrap responsive code
+#                position: 'top'                        # zone in the dashboard
+#                type:     sonata.admin.block.stats   # block id
+#                settings:
+#                    code:  sonata.admin.global_contact    # admin code - service id
+#                    icon:  'fa-envelope'                  # font awesome icon
+#                    text:  'Demandes de contact Globales non lues'
+#                    color: 'bg-yellow'                 # colors: bg-green, bg-red and bg-aqua
+#                    filters:                         # filter values
+#                        read: { value: false }
+
+    assets:
+        stylesheets:
+            - bundles/sonatacore/vendor/bootstrap/dist/css/bootstrap.min.css
+            - bundles/sonatacore/vendor/components-font-awesome/css/font-awesome.min.css
+            - bundles/sonatacore/vendor/ionicons/css/ionicons.min.css
+            - bundles/sonataadmin/vendor/admin-lte/dist/css/AdminLTE.min.css
+            - bundles/sonataadmin/vendor/admin-lte/dist/css/skins/skin-black.min.css
+            - bundles/admin/css/iCheck/blue.css
+            - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css
+            - bundles/sonataadmin/vendor/jqueryui/themes/base/jquery-ui.css
+            - bundles/sonatacore/vendor/select2/select2.css
+            - bundles/sonatacore/vendor/select2-bootstrap-css/select2-bootstrap.min.css
+            - bundles/sonataadmin/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css
+            - bundles/sonataadmin/css/styles.css
+            - bundles/sonataadmin/css/layout.css
+            - bundles/sonataadmin/css/tree.css
+            - bundles/admin/css/admin.css
+            - bundles/admin/vendor/json-editor/dist/jsoneditor.min.css
 sonata_core:
     flashmessage:
         success:

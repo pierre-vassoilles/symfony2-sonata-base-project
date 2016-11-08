@@ -1,0 +1,64 @@
+.box,
+.box.box-primary{
+    border-top-color: #fd5f4b;
+}
+
+.participaction-bg-color,
+.btn.btn-primary {
+    background-color: #fd5f4b;
+}
+
+.btn.btn-primary {
+    border-color: #b74436;
+}
+
+a,
+.btn-link {
+    color: #b74436;
+}
+
+a:hover,
+a:active,
+a:focus,
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus {
+    color: #fd5f4b;
+}
+
+.bg-light-blue, .label-primary, .modal-primary .modal-body {
+    background-color: #b74436 !important;
+}
+
+
+.select2-drop-auto-width, .select2-drop.select2-drop-above.select2-drop-active {
+    border-top-color: #fd5f4b;
+}
+.select2-drop-active {
+    border-color: #fd5f4b;
+}
+.select2-drop-active {
+    border: 1px solid #b74436;
+}
+.select2-results .select2-highlighted {
+    background: #b74436;
+    color: #fff;
+}
+.select2-container-active .select2-choice, .select2-container-multi.select2-container-active .select2-choices {
+    border-color: #b74436;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 108, 71, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(233, 108, 71, 0.6);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.bg-aqua,
+.callout.callout-info,
+.alert-info,
+.label-info,
+.modal-info
+.modal-body {
+    background-color: #fd5f4b !important;
+}

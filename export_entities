@@ -1,0 +1,3 @@
+#!/bin/sh
+
+php vendor/pierre-vassoilles/mysql-workbench-schema-exporter/cli/export.php --config=mwb-export.json docs/lmh.mwb

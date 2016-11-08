@@ -1,0 +1,10 @@
+{% block plain_date_widget %}
+    <span>{% if value %}{{ value|date(format) }}{% else %}-{% endif %}</span>
+{% endblock plain_date_widget %}
+
+{% block plain_text_widget %}
+    {% if property and value %}
+        {% set value = attribute(value, property) %}
+    {% endif %}
+    <span>{% if value %}{% if raw %}{{ value|raw|nl2br }}{% else %}{{ value|nl2br }}{% endif %}{% else %}-{% endif %}</span>
+{% endblock plain_text_widget %}

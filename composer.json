@@ -28,13 +28,13 @@
         "knplabs/doctrine-behaviors": "1.1.*",
         "egeloen/ckeditor-bundle": "4.*",
         "knplabs/knp-paginator-bundle": "2.5.*",
-        "hpatoio/deploy-bundle": "1.5.*",
 
-        "icedevelopment/mysql-workbench-schema-exporter": "1.0.*",
+        "pierre-vassoilles/mysql-workbench-schema-exporter": "^1.0",
+        "presta/sitemap-bundle": "^1.5",
         "helios-ag/fm-elfinder-bundle": "5.3.*",
-        "icedevelopment/apc-bundle": "1.0.*",
         "doctrine/data-fixtures": "^1.1",
-        "doctrine/doctrine-fixtures-bundle": "^2.3"
+        "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "sonata-project/doctrine-extensions": "^1.0"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "~2.7"

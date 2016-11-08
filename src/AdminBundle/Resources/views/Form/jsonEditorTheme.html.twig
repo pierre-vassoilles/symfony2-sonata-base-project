@@ -1,0 +1,40 @@
+{% block json_editor_widget %}
+    <script src="{{ asset('bundles/admin/vendor/json-editor/dist/jsoneditor.min.js') }}"></script>
+    {% set attr = attr|merge({'class': attr.class|default('') ~ ' form-control'}) %}
+    <input type="hidden" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %} data-type="elfinder-button-field"/>
+
+    <div id="editor_{{ id }}" style="width: 100%; height: 400px;"></div>
+
+    <script>
+
+        $(document).ready(function() {
+            // create the editor
+            var container = document.getElementById("editor_{{ id }}");
+            var options = {};
+            var editor = new JSONEditor(container, options);
+
+            // set json
+            {% if value %}
+                var json = {{ value|raw }};
+            {% else %}
+                var json = {
+                    "label": "",
+                    "required": true,
+                    "help": "",
+                    "attr": {
+                        "placeholder": "",
+                        "class": ""
+                    }
+                };
+            {% endif %}
+            editor.set(json);
+
+
+            $('form').on('submit', function() {
+                console.log(editor.get());
+                $('#{{ id }}').val(JSON.stringify(editor.get()));
+            });
+        });
+
+    </script>
+{% endblock json_editor_widget %}

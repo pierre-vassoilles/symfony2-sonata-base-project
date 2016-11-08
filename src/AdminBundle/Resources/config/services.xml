@@ -5,10 +5,20 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <!--Twig ext-->
+        <service id="admin.twig.admin_extension" class="AdminBundle\Twig\AdminExtension">
+            <tag name="twig.extension" />
+        </service>
+
+
+        <!--FormTypes-->
+        <service id="admin.form.type.elfinder" class="AdminBundle\Form\ElFinderType">
+            <tag name="form.type" alias="elfinder" />
+        </service>
 
         <!--User-->
         <service id="sonata.admin.user" class="AdminBundle\Admin\UserAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Utilisateurs" label="Clients" />
+            <tag name="sonata.admin" manager_type="orm" group="Utilisateurs" label="Utilisateurs" icon="fa fa-users" />
             <argument />
             <argument>CoreBundle\Entity\User</argument>
             <argument></argument>
