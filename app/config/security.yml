@@ -27,6 +27,21 @@ security:
             id: fos_user.user_manager
 
     firewalls:
+
+        admin:
+            pattern: ^/admin
+
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+                check_path: /admin/login_check
+                login_path: /admin/login
+                default_target_path: /admin
+            logout:
+                path:   /admin/logout
+                target: /admin
+            anonymous:    true
+
         # defaut login area for standard users
         main:
             switch_user:        true
@@ -49,6 +64,10 @@ security:
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/efconnect, role: ROLE_SONATA_ADMIN }
+        - { path: ^/elfinder, role: ROLE_SONATA_ADMIN }
 
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }

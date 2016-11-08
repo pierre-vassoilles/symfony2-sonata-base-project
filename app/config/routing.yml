@@ -23,6 +23,24 @@ _sonata_admin:
     prefix: /admin
 
 #FOSUserBundle
+
+admin_security_login:
+    path: /admin/login
+    defaults: { _controller: FOSUserBundle:Security:login }
+
+admin_security_check:
+    path: /admin/login_check
+    defaults: { _controller: FOSUserBundle:Security:check }
+
+admin_security_logout:
+    path: /admin/logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+
+admin_resetting_request:
+    path: /admin/request
+    defaults: { _controller: FOSUserBundle:Resetting:request }
+
+
 fos_user_security_login:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
