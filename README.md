@@ -1,5 +1,5 @@
-Symfony Standard Edition with SonataAdminBundle installed
-==============================================
+Symfony Standard Edition with SonataAdminBundle installed For Intuitiv Technology
+=================================================================================
 
 Welcome to the Symfony Sonata Distribution - a fully-functional Symfony2 Sonata application that you can use as the skeleton for your new application.
 
@@ -12,10 +12,16 @@ NOTE: For older Symfony versions use the corresponding branch.
 1) Installing the Sonata Distribution
 -------------------------------------
 
-For now, you just have to clone this repository with a simple git command :
+For a new project installation, use these commands :
 
     cd path/to/your/webroot
-    git clone https://github.com/pierre-vassoilles/symfony2-base-project.git ./
+    wget https://github.com/pierre-vassoilles/symfony2-sonata-base-project/archive/intuitiv_skeleton.zip
+    unzip intuitiv_skeleton.zip
+    mv symfony2-sonata-base-project-intuitiv_skeleton/* ./
+    mv symfony2-sonata-base-project-intuitiv_skeleton/.gitignore .gitignore
+    rm -rf symfony2-sonata-base-project-intuitiv_skeleton
+    rm -rf intuitiv_skeleton.zip 
+    
     
 Next, you can use the "install_project" shell to initialize the project.
 Warning : You must have Composer globally installed to use it.
@@ -100,14 +106,10 @@ Or you can manually create a user yourself
 - **liip/imagine-bundle** : Very usefull for image display
 - **knplabs/doctrine-behaviors** : Implementing some Traits like Timestampable, Sluggable, SoftDeletable, etc.
 - **egeloen/ckeditor-bundle** : Adds the famous ckEditor to your forms (available for admin section too)
-- **hpatoio/deploy-bundle** : Deployment bundle using rsync command
-- **icedevelopment/mysql-workbench-schema-exporter** : A very userful bundle if you use MySQL Workbench to create your database. It automatically creates your entities from a MySQL Workbench model
-- **icedevelopment/apc-bundle** : Command line tool to clear APC cache and OPCode cache
+- **pierre-vassoilles/mysql-workbench-schema-exporter** : A very userful bundle if you use MySQL Workbench to create your database (compatible PHP7). It automatically creates your entities from a MySQL Workbench model
 
 Skeleton Bundles :
 
-- **Ice/EntityBundle** : A Bundle where you can put all your entities
-- **Ice/FrontendBundle** : Contains a basic layout, website assets and basic controllers like content pages
-- **Ice/CommonBundle** : Contains common features of the projets like Menu and emails
-- **Ice/AdminBundle** : The admin section. Contains the admin classes and the Sonata overrides
-- **Ice/UserBundle** : Override of the FOSUserBundle
+- **AdminBundle** : An admin bundle for all sonata admin code
+- **CoreBundle** : Contains a basic layout, website assets and basic controllers like content pages, including entities
+- **UserBundle** : Override of the FOSUserBundle
