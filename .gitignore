@@ -32,3 +32,6 @@
 # Entity Export
 /src/CoreBundle/EntityExport
 /src/*/Entity/*.php~
+
+#CSSLint
+/src/CoreBundle/Resources/public/csslint-report

@@ -29,11 +29,6 @@ module.exports = function (grunt) {
         'watch' // Any other watch tasks you want to run
     ]);
 
-    // BrowserSync
-    grunt.registerTask('proxy', [
-        'watch' // Any other watch tasks you want to run
-    ]);
-
     // Les tâches de productions
     grunt.registerTask('prod', [
         //'jshint',

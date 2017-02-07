@@ -40,7 +40,7 @@ monolog:
             handler:        swift_critical
         swift_critical:
             type:           swift_mailer
-            from_email:     %mail_no_reply%
+            from_email:     %mail_from%
             to_email:       %mail_admin%
             subject:        '[%monolog_sitename% - %kernel.environment%] %monolog_subject%'
             level:          info

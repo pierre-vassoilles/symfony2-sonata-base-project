@@ -14,14 +14,16 @@ parameters:
     mailer_host:       127.0.0.1
     mailer_user:       ~
     mailer_password:   ~
+    mailer_port:       ~
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    site_url: 'http://your-site.url/app_dev.php'
-    basic_auth_username: null
-    basic_auth_password: null
+    site_domain: 'your-site.url'
+    site_url: 'http://%site_domain%'
 
-    mail_no_reply: 'contact@your-site.com'
+    mail_from: 'contact@your-site.com'
     mail_admin: 'admin@your-site.com'
+    mail_contact: 'your-contact-mail@example.com'
+
     monolog_subject: 'A critical error occurred !'
-    monolog_sitename: 'Your site name'
+    monolog_sitename: '%site_name%'

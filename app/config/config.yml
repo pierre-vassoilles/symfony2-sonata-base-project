@@ -11,11 +11,15 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-    site_name: 'Your site name'
-    mail_contact: 'your-contact-mail@example.com'
+    site_name: 'Base SF2'
+
     web_directory_name: webroot/web
     path_to_upload_dir: ../data/uploads
     liip_imagine.resolvers.default.web_path.cache_prefix: media/cache
+
+    router.request_context.host: %site_domain%
+    router.request_context.scheme: http
+    knp.doctrine_behaviors.blameable_subscriber.user_entity: CoreBundle\Entity\User
 
 framework:
     #esi:             ~
@@ -74,6 +78,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    port:      "%mailer_port%"
 
 
 fos_user:
@@ -81,7 +86,7 @@ fos_user:
     firewall_name: main
     user_class: CoreBundle\Entity\User
     from_email:
-          address: %mail_contact%
+          address: %mail_from%
           sender_name : %site_name%
 #    registration:
 #            form:
