@@ -92,6 +92,17 @@ Or you can manually create a user yourself
 ### Install assets:
 
     ./app/console assets:install --symlink --relative web
+    
+### Install npm packages & use grunt to minify CSS/JS
+
+First of all, navigate to `src/CoreBundle/Resources` and install npm packages
+
+    npm install
+
+Then you can use grunt in two ways :
+
+    grunt serve # Start a watch task that minify your CSS/JS everytime you save a file
+    grunt prod # Minify your files
 
 
 4) Available Bundles
