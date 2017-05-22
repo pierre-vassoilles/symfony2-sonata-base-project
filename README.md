@@ -101,8 +101,8 @@ First of all, navigate to `src/CoreBundle/Resources` and install npm packages
 
 Then you can use grunt in two ways :
 
-    grunt serve # Start a watch task that minify your CSS/JS everytime you save a file
-    grunt prod # Minify your files
+    grunt watch # Start a watch task that minify your CSS/JS everytime you save a file
+    grunt prod # Launch all tasks (sass, concat CSS / JS, minify CSS / JS, autoprefixer, etc.)
 
 
 4) Available Bundles
