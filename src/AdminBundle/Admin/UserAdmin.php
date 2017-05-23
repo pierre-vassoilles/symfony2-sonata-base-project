@@ -9,6 +9,8 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Admin\Admin;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UserAdmin extends AbstractAdmin
 {
@@ -38,15 +40,15 @@ class UserAdmin extends AbstractAdmin
 
         $formMapper
             ->with('Informations de connexion', array('class' => 'col-md-6' ))
-                ->add('username','text', array(
+                ->add('username', TextType::class, array(
                     'label' => 'Identifiant',
                     'required' => true,
                 ))
-                ->add('email','email', array(
+                ->add('email', EmailType::class, array(
                     'label' => 'Adresse mail',
                     'required' => true,
                 ))
-                ->add('plainPassword','text', array(
+                ->add('plainPassword', TextType::class, array(
                     'label' => 'Changer le mot de passe',
                     'required' => false,
                 ))
@@ -56,11 +58,11 @@ class UserAdmin extends AbstractAdmin
                 ))
             ->end()
             ->with('Informations personnelles', array('class' => 'col-md-6' ))
-                ->add('firstname', 'text', array(
+                ->add('firstname', TextType::class, array(
                     'label' => 'Prénom',
                     'required' => true,
                 ))
-                ->add('lastname', 'text', array(
+                ->add('lastname', TextType::class, array(
                     'label' => 'Nom',
                     'required' => true,
                 ))

@@ -24,7 +24,7 @@ security:
 
     providers:
         fos_userbundle:
-            id: fos_user.user_manager
+            id: fos_user.user_provider.username
 
     firewalls:
 
@@ -33,7 +33,7 @@ security:
 
             form_login:
                 provider: fos_userbundle
-                csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+                csrf_token_generator: security.csrf.token_manager
                 check_path: /admin/login_check
                 login_path: /admin/login
                 default_target_path: /admin

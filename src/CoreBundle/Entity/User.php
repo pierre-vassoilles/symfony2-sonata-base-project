@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="CoreBundle\Entity\Repository\UserRepository")
  * @ORM\Table(name="user")
  */
-class User extends \FOS\UserBundle\Entity\User
+class User extends \FOS\UserBundle\Model\User
 {
 
     /**

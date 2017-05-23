@@ -9,8 +9,7 @@ This document contains information on how to download, install, and start using 
 
 NOTE: For older Symfony versions use the corresponding branch.
 
-1) Installing the Sonata Distribution
--------------------------------------
+## 1. Installing the Sonata Distribution
 
 For a new project installation, use these commands :
 
@@ -36,8 +35,7 @@ The installer will do :
 - Install assets with symlinks
 
 
-2) Checking your System Configuration
--------------------------------------
+## 2. Checking your System Configuration
 
 Before starting coding, make sure that your local system is properly
 configured for Symfony.
@@ -52,10 +50,9 @@ Access the `config.php` script from a browser:
 
 If you get any warnings or recommendations, fix them before moving on.
 
-3) Set up, initialize and browse the app manually
--------------------------------------------------
+## 3. Set up, initialize and browse the app manually
 
-### Installing dependencies
+### 3.1 Installing dependencies
 
 If you have Composer installed globally on your server, juste do :
 
@@ -70,14 +67,14 @@ Then, run :
     
     php composer.phar install -vvv -o
 
-### Initializing the DB
+### 3.2 Initializing the DB
 
 Before you can run the server and log in to Sonata you need to create the
 tables first.
 
     ./app/console doctrine:schema:create
 
-### Create the users
+### 3.3 Create the users
 
 You can either create a handful of users like this (one of the usernames is 
 'superadmin' with password 'test')
@@ -89,24 +86,25 @@ Or you can manually create a user yourself
     ./app/console fos:user:create username emai@example.com password
     ./app/console fos:user:promote username ROLE_SONATA_ADMIN
 
-### Install assets:
+### 3.4 Install assets
 
     ./app/console assets:install --symlink --relative web
     
-### Install npm packages & use grunt to minify CSS/JS
+### 3.5 Install npm packages & use grunt to minify CSS/JS
 
 First of all, navigate to `src/CoreBundle/Resources` and install npm packages
 
     npm install
 
 Then you can use grunt in two ways :
+    
+```bash
+grunt watch # Start a watch task that minify your CSS/JS everytime you save a file
+grunt prod # Launch all tasks (sass, concat CSS / JS, minify CSS / JS, autoprefixer, etc.)
+```
 
-    grunt watch # Start a watch task that minify your CSS/JS everytime you save a file
-    grunt prod # Launch all tasks (sass, concat CSS / JS, minify CSS / JS, autoprefixer, etc.)
 
-
-4) Available Bundles
--------------------------------------------------
+## 4. Available Bundles
 
 - **Symfony Standard Edition 2.8**
 - **Doctrine 2**

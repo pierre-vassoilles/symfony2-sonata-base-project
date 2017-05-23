@@ -1,8 +1,8 @@
 # APP
-/app/cache/*
-/app/logs/*
+/var/cache/*
+/var/logs/*
 /app/config/parameters.yml
-/app/bootstrap.php.cache
+/var/bootstrap.php.cache
 /vendor
 
 # WEB
