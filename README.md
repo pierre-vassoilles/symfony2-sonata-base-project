@@ -1,7 +1,7 @@
 Symfony Standard Edition with SonataAdminBundle installed For Intuitiv Technology
 =================================================================================
 
-Welcome to the Symfony Sonata Distribution - a fully-functional Symfony2 Sonata application that you can use as the skeleton for your new application.
+Welcome to the Symfony Sonata Distribution - a fully-functional Symfony 3 Sonata application that you can use as the skeleton for your new application.
 
 This distribution exists to save you from repeating all the steps needed to create a basic Sonata app.
 
@@ -14,19 +14,23 @@ NOTE: For older Symfony versions use the corresponding branch.
 For a new project installation, use these commands :
 
     cd path/to/your/webroot
-    wget https://github.com/pierre-vassoilles/symfony2-sonata-base-project/archive/intuitiv_skeleton.zip
-    unzip intuitiv_skeleton.zip
-    mv symfony2-sonata-base-project-intuitiv_skeleton/* ./
-    mv symfony2-sonata-base-project-intuitiv_skeleton/.gitignore .gitignore
-    rm -rf symfony2-sonata-base-project-intuitiv_skeleton
-    rm -rf intuitiv_skeleton.zip 
+    wget https://github.com/pierre-vassoilles/symfony2-sonata-base-project/archive/intuitiv_skeleton_sf3.zip
+    unzip intuitiv_skeleton_sf3.zip
+    mv symfony2-sonata-base-project-intuitiv_skeleton_sf3/* ./
+    mv symfony2-sonata-base-project-intuitiv_skeleton_sf3/.gitignore .gitignore
+    rm -rf symfony2-sonata-base-project-intuitiv_skeleton_sf3
+    rm -rf intuitiv_skeleton_sf3.zip 
     
     
-Next, you can use the "install_project" shell to initialize the project.
-Warning : You must have Composer globally installed to use it.
+Next, you can use the `install_project` shell to initialize the project :
+
+    ./bin/install_project
+
+**Warning** : You must have Composer globally installed to use it and the command should be run from the root directory.
+
 The installer will do :
 
-- Create mandatory directories like app/cache, app/logs, data/uploads, web/media (for LiipImagineBundle)
+- Create mandatory directories like var/cache, var/logs, data/uploads, web/media (for LiipImagineBundle)
 - Composer install --verbose -o
 - Set ACLs on some directories if you want to develop with an other user than www-data
 - Validate and Update the database
@@ -40,9 +44,9 @@ The installer will do :
 Before starting coding, make sure that your local system is properly
 configured for Symfony.
 
-Execute the `check.php` script from the command line:
+Execute the `symfony_requirements` script from the command line:
 
-    php app/check.php
+    bin/symfony_requirements
 
 Access the `config.php` script from a browser:
 
@@ -72,23 +76,23 @@ Then, run :
 Before you can run the server and log in to Sonata you need to create the
 tables first.
 
-    ./app/console doctrine:schema:create
+    ./bin/console doctrine:schema:create
 
 ### 3.3 Create the users
 
 You can either create a handful of users like this (one of the usernames is 
 'superadmin' with password 'test')
 
-    ./app/console doctrine:fixtures:load
+    ./bin/console doctrine:fixtures:load
 
 Or you can manually create a user yourself
 
-    ./app/console fos:user:create username emai@example.com password
-    ./app/console fos:user:promote username ROLE_SONATA_ADMIN
+    ./bin/console fos:user:create username emai@example.com password
+    ./bin/console fos:user:promote username ROLE_SONATA_ADMIN
 
 ### 3.4 Install assets
 
-    ./app/console assets:install --symlink --relative web
+    ./bin/console assets:install --symlink --relative web
     
 ### 3.5 Install npm packages & use grunt to minify CSS/JS
 
@@ -106,7 +110,7 @@ grunt prod # Launch all tasks (sass, concat CSS / JS, minify CSS / JS, autopref
 
 ## 4. Available Bundles
 
-- **Symfony Standard Edition 2.8**
+- **Symfony Standard Edition 3.2**
 - **Doctrine 2**
 - **FOSUserBundle** : friendsofsymfony/user-bundle
 - **FOS JsRoutingBundle** : friendsofsymfony/jsrouting-bundle

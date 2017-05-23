@@ -21,7 +21,6 @@
 
 #PHPStorm
 /.idea
-.idea
 
 /data
 !/data/.gitkeep

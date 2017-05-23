@@ -50,10 +50,10 @@ separator='\n---------------------------------------------\n'
 echo $separator
 echo $BCyan Create directories if not exists
 echo $separator
-echo app/cache
-mkdir -p app/cache
-echo app/logs
-mkdir -p app/logs
+echo var/cache
+mkdir -p var/cache
+echo var/logs
+mkdir -p var/logs
 echo data/uploads
 mkdir -p data/uploads
 echo web/media
@@ -67,22 +67,22 @@ composer install --verbose -o
 echo $separator
 echo $BCyan Setting ACLs $Color_Off
 echo $separator
-echo app/cache, app/logs, data, web/media
-setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs data web/media
-setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs data web/media
+echo var/cache, var/logs, data, web/media
+setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/logs data web/media
+setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx var/cache var/logs data web/media
 echo done.
 
 echo $separator
 echo $BCyan Updating database $Color_Off
 echo $separator
-php app/console doctrine:schema:validate
-php app/console doctrine:schema:update --dump-sql
+php bin/console doctrine:schema:validate
+php bin/console doctrine:schema:update --dump-sql
 
 echo $separator
 read -r -p "Would you like to update the database ? [y/n]  " response
 if [ "$response" = "y" ]; then
     echo Updating database...
-    php app/console doctrine:schema:update --force
+    php bin/console doctrine:schema:update --force
 fi
 echo $separator
 
@@ -93,19 +93,19 @@ echo $separator
 read -r -p "Would you like to load user fixtures ? [y/n]  " response
 if [ "$response" = "y" ]; then
     echo Loading user datas...
-    php app/console doctrine:fixtures:load
+    php bin/console doctrine:fixtures:load
 fi
 
 echo $separator
 echo $BCyan Clearing cache $Color_Off
 echo $separator
-php app/console cache:clear
-php app/console cache:clear -e=prod
+php bin/console cache:clear
+php bin/console cache:clear -e=prod
 
 echo $separator
 echo $BCyan Installing assets using Symlink $Color_Off
 echo $separator
-php app/console assets:install --symlink
+php bin/console assets:install --symlink
 
 echo $separator
 echo $BGreen Install finished ! $Color_Off
